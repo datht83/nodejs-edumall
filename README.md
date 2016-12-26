@@ -9,3 +9,5 @@
 	(function(){
 		// coding here
 	}())
+- Sử dụng module: 
+	+ 
