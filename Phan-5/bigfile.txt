@@ -1,0 +1,548 @@
+Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.
+Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.Làm điện tử chắc ai cũng đã từng làm mạch in bằng tay và đã gặp một số vấn đề không rõ và không biết làm thế nào.
+
+Khi mô phỏng trên phần mềm Proteus thì chạy bình thường nhưng khi làm mạch thật thì lại trục trặc. Hưng giúp các bạn giải đáp thắc mắc đó và cách khắc phục một số vấn đề đó như sau:
+
+Vẽ lại nguyên lí trên phần mềm nhưng phải chú ý là các dây đã nối hết chưa, trên Proteus các IC hay dấu (mặc định chân nguồn là VCC, Vss) chân nguồn, đã nối chưa ??
+Mạch làm bằng tay, với các khe hẹp nhỏ cần làm sạch kĩ, vì nếu còn mảng đồng bám sẽ có điện trở nối giữa hai chân. Dùng dao dọc giấy mũi nhọn rạch qua vài lần những khe được đánh dấu ở hình dưới đây. Có những mảng đồng còn dính không thể nhìn bằng mắt, đo thì thông mạch, nhưng khi rạch dao qua thì lại hết < kinh nghiệm> :D
+Nguyên tắc cơ bản khi hàn thử nghiệm, phát hiện lỗi, sửa chữa lỗi là ... không hàn tất cả linh kiện lên rồi đo :D
+Quá trình warm up này gồm một số bước cơ bản sau:
+
+So sánh mạch in bằng tay đã chế tạo với mạch vẽ trên phần mềm xem có bị miss hay dính các chân nào ko.
+đo trở kháng những net - dây cạnh nhau, đảm bảo rằng đồng hồ chế độ ohm kế có điện trở > 1M Ohm. Nếu có điện trở vài trăm/chục k Ohm, thậm chí vài Ohm thì dùng dao dọc giấy rạch sạch những khe cách điện.
+Hàn khối nguồn như 5V, 3V3, ... kiểm tra điện áp ra đủ chưa ? Thử bằng tải trở để đốt dòng tải thử xem điện áp có sụt không ? Nếu sụt thì mạch chạy sẽ chập chờn đó. Như vậy cần kiểm tra lại công suất nguồn cấp và các net đồng vào có dây nào bị mảnh quá hoặc gần đứt ko. Điều đó làm tăng trở kháng đầu vào nên khi tăng dòng làm rơi áp hết.
+Sau khối nguồn hàn tiếp các khối tín hiệu đơn giản như Opam, on/off transitor và thử vận hành chúng bằng các dòng/ áp kích ngoài để xem nó đã hoạt động đúng chưa. Ví dụ opam setup để khuếch đại 10 lần thì cấp 1 tín hiệu 0.1V vào thì đầu ra phải có 1V đã.
+Tiếp là khối MCU, cần phải nạp code đơn giản như nháy led trước để đảm bảo rằng việc cấp nguồn, Osc - dao động, Vcap - Vcore đã đầy đủ để MCU hoạt động. Sau này thêm code mà không chạy thì biết chắc rằng đó là do phần mềm hoặc xung đột logic ở một số chân khác.
+Bớt đổ fill đầy bo mạch đi, nó ko phải lúc nào cũng có tác dụng chống nhiễu đâu. Còn làm nhiễu nhiều hơn. Trong trường hợp này nó làm tăng rủi ro và tăng trở kháng liên kết giữa các net - dây đồng. Nếu dùng nên để khoảng cách trống - clear distance lớn hơn > 30th để đảm bảo cách điện.

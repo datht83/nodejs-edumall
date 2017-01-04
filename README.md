@@ -10,4 +10,11 @@
 		// coding here
 	}())
 - Sử dụng module: 
-	+ 
+- Phần 4: Events và Events Emitter trong nodejs
+- Phần 5: Code ko đồng bộ, libuv, Events loop, Streams, File...
+- Phần 6: Giao thức Http và sử dụng Nodejs để xây dựng web server
+- Phần 7: quan ly thu vien npm
+- Phần 8: Express
+- Phần 9: Json. csdl
+- phần 10: xay dung ung dung 
+- - phần 11: tong ket
