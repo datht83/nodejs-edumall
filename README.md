@@ -18,3 +18,9 @@
 - Phần 9: Json. csdl
 - phần 10: xay dung ung dung 
 - - phần 11: tong ket
+
+
+
+
+- tao file package.json : npm init
+- install package va luu dependencies: npm install package_name --save
